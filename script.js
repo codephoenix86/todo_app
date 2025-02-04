@@ -1,28 +1,26 @@
-// components
-function taskString(data) {
-  return `
-  <div class="task">
-    <input type="checkbox" class="task-checkbox">
-    <p class="task-name">${data.taskName}</p>
-    <input type="button" value="edit">
-  </div>
-         `
-}
-
 // variables
-let searchBar = document.querySelector("#search .search-bar");
-let addTaskButton = document.querySelector("#buttons .add-btn");
-let tasksSection = document.querySelector("#tasks");
+const searchBar = document.querySelector("#search .search-bar");
+const addTaskButton = document.querySelector("#buttons .add-btn");
+const tasksSection = document.querySelector("#tasks");
 
 // event listeners
 addTaskButton.addEventListener("click", function () {
-  addTask(tasksSection, searchBar, taskElement)
+  const text = searchBar.value
+  addTask(text);
+  searchBar.value = new String()
 });
 
-// event handlers
-function addTask(tasksLog, searchBar) {
-  const newTask = taskString({taskName:searchBar.value})
-  
+function addTask(text) {
+  const element = parseElement(
+`
+  <div class="task">
+    <input type="checkbox" class="task-checkbox">
+    <p class="task-name">${text}</p>
+    <input type="button" value="edit">
+  </div>
+`
+  )
+  tasksSection.appendChild(element)
 }
 
 // utils
