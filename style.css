@@ -4,7 +4,7 @@
 
 /* variable */
 :root {
-  --todo-width: 360px;
+  --todo-width: 480px;
 }
 
 /* todo container */
@@ -21,13 +21,15 @@
 }
 
 /* search section */
-#search > input {
-  font-size: 1.125rem;
+#search > .search-bar {
+  font-size: 1rem;
   font-weight: lighter;
   width: 100%;
   box-sizing: border-box;
   padding: 6px;
   border-radius: 0.5rem;
+  border: 1px solid grey;
+  color: grey;
 }
 
 #search > input:focus {
@@ -48,9 +50,23 @@
   gap: 8px;
 }
 
-#tasks > .task > .task-name {
+#tasks .task .task-name {
   flex-grow: 1;
   margin: 0;
+  padding: 0;
+  font-size: 1rem;
+  font-family: sans-serif;
+  border: none;
+}
+
+#tasks .disabled {
+  text-decoration: line-through;
+  color: grey;
+}
+
+#tasks > .task > .task-name:focus {
+  outline: none;
+  border: none;
 }
 
 /* buttons section */
