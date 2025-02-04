@@ -7,19 +7,25 @@ const tasksSection = document.querySelector("#tasks");
 // event listeners
 addTaskButton.addEventListener("click", function () {
   const text = searchBar.value;
+  if (tasksSection.classList.contains("empty"))
+    tasksSection.classList.remove("empty");
   addTask(text);
   searchBar.value = new String();
 });
 
 deleteButton.addEventListener("click", function () {
   deleteAll(tasksSection);
+  tasksSection.classList.add("empty");
 });
 
 tasksSection.addEventListener("click", function (event) {
   if (event.target.className == "edit-btn")
     editTask(event.target.parentElement);
-  else if (event.target.className == "delete-btn")
+  else if (event.target.className == "delete-btn") {
     deleteTask(event.target.parentElement);
+    if (tasksSection.childElementCount == 0)
+      tasksSection.classList.add("empty");
+  }
 });
 
 tasksSection.addEventListener("change", function (event) {
@@ -63,12 +69,10 @@ function editTask(task) {
 }
 
 function updateTask(element) {
-  const checkbox = element.querySelector('.task-checkbox')
-  const name = element.querySelector('.task-name')
-  if (checkbox.checked)
-    name.classList.add('disabled')
-  else
-    name.classList.remove('disabled')
+  const checkbox = element.querySelector(".task-checkbox");
+  const name = element.querySelector(".task-name");
+  if (checkbox.checked) name.classList.add("disabled");
+  else name.classList.remove("disabled");
 }
 
 // utils

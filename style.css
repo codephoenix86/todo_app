@@ -5,6 +5,7 @@
 /* variable */
 :root {
   --todo-width: 480px;
+  --todo-height: 240px;
 }
 
 /* todo container */
@@ -17,6 +18,7 @@
   flex-direction: column;
   gap: 16px;
   width: var(--todo-width);
+  height: 240px;
   padding: 8px;
 }
 
@@ -40,8 +42,28 @@
 
 #tasks {
   display: flex;
+  position: relative;
   flex-direction: column;
+  flex-grow: 1;
+  overflow-y: auto;
+  scrollbar-width: none;
   gap: 12px;
+}
+
+.empty::before {
+  content: "Add a new task to begin.";
+  text-align: center;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-size: 1.25rem;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  opacity: 0.3;
+  background-image: url(edit-3.png);
+  background-size: 20%;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 #tasks > .task {
