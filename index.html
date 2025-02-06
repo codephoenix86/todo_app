@@ -3,20 +3,31 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="/script.js" defer></script>
-    <link rel="stylesheet" href="/style.css" />
-    <title>Todo</title>
+    <link rel="stylesheet" href="style.css" />
+    <title>To Do</title>
   </head>
   <body>
-    <div id="todo">
-      <section id="search">
-        <input type="text" class="search-bar">
+    <div class="todoContainer">
+      <section class="task_entry">
+        <input type="text" class="task-input task_entry-input">
+        <input type="button" value="add" class="btn add">
       </section>
-      <section id="tasks" class="empty">
-      </section>
-      <section id="buttons">
-        <input type="button" class="add-btn" value="add">
-        <input type="button" class="delete-all-btn" value="delete all">
+      <section class="tasklog">
+        <div class="task">
+          <input type="checkbox" class="task-checkbox"/>
+          <p class="task-name">coding practice</p>
+          <input type="button" class="btn delete_task" value="delete" />
+        </div>
+        <div class="task">
+          <input type="checkbox" class="task-checkbox"/>
+          <p class="task-name">giving codechef contest</p>
+          <input type="button" class="btn delete_task" value="delete" />
+        </div>
+        <div class="task">
+          <input type="checkbox" class="task-checkbox"/>
+          <p class="task-name">doing college assignment</p>
+          <input type="button" class="btn delete_task" value="delete" />
+        </div>
       </section>
     </div>
   </body>
