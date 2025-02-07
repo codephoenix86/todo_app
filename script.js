@@ -3,6 +3,9 @@ class Task {
     this.id = id;
     this.name = name;
   }
+  editName(name) {
+    this.name = name;
+  }
 }
 class TaskLog {
   constructor() {
@@ -15,7 +18,7 @@ class TaskLog {
   edit(id, name) {
     const i = this.#getTask(id);
     const task = this.arr[i];
-    task.name = name;
+    task.editName(name);
   }
   delete(id) {
     const i = this.#getTask(id);
@@ -78,15 +81,33 @@ function displayTasks(tasklog) {
   });
 }
 
+function addTask(name) {
+  tasklog.add(name);
+  displayTasks(tasklog);
+}
+
+function isValidTask(name) {
+  if (name == '')
+    return false;
+  return true;
+}
+
 const tasklog = new TaskLog();
-tasklog.insert([new Task(1, 'coding practice'), new Task(2,'writing journal')])
-displayTasks(tasklog);
 
 elements.add.addEventListener('click', function (event) {
-  console.log(elements.input)
   const name = elements.input.value;
-  elements.input.value = ''
-  tasklog.add(name);
-  console.log(tasklog);
-  displayTasks(tasklog);
+  if (isValidTask(name))
+  {
+    addTask(name);
+    elements.input.value = '';
+  }
 });
+
+elements.input.addEventListener('keydown', function (event) {
+  const name = elements.input.value;
+  if (event.key == 'Enter' && isValidTask(name))
+  {
+    addTask(name);
+    elements.input.value = '';
+  }
+})
