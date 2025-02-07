@@ -56,7 +56,6 @@ const elements = {
     </div>`
     const element = parse(html);
     const del = element.querySelector('.delete');
-    const name = element.querySelector('.task-name');
     del.addEventListener('click', function (event) {
       console.log('delete button is clicked')
       console.log(tasklog)
@@ -79,6 +78,19 @@ function displayTasks(tasklog) {
     const element = elements.createTask(task);
     elements.tasklog.appendChild(element);
   });
+  storeTasks(tasklog);
+}
+function storeTasks(tasklog) 
+{
+  const jsonString = JSON.stringify(tasklog);
+  localStorage.setItem('tasklog', jsonString);
+}
+
+function restoreTasks()
+{
+  const obj = JSON.parse(localStorage.getItem('tasklog'));
+  console.log(obj)
+  return Object.assign(new TaskLog(), obj);
 }
 
 function addTask(name) {
@@ -92,7 +104,8 @@ function isValidTask(name) {
   return true;
 }
 
-const tasklog = new TaskLog();
+const tasklog = restoreTasks();
+displayTasks(tasklog);
 
 elements.add.addEventListener('click', function (event) {
   const name = elements.input.value;
