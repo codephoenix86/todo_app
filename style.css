@@ -26,15 +26,13 @@
 
 /* 
 <div class="task">
-  <input type="checkbox" class="task-checkbox"/>
-  <p class="task-name">${name of task}</p>
-  <input type="button" class="btn edit" value="edit" />
-  <input type="button" class="btn delete" value="delete" />
+  <input type="checkbox" id class="task-checkbox"/>
+  <input id type="text" value class="task-name">
+  <input type="button" id class="btn delete" value="delete">
 </div>
 */
 
 .task {
-  /* border: 1px solid green; */
   display: flex;
   align-items: center;
   gap: 8px;
@@ -108,14 +106,13 @@
 /* task entry section */
 
 /* 
-<section class="taskEntry">
-  <input type="text" class="task-input taskEntry-input">
+<section class="task_entry">
+  <input type="text" class="task-input taskentry-input">
   <input type="button" value="add" class="btn add">
 </section>
 */
 
 .task_entry {
-  /* border: 1px solid black; */
   border-radius: 0.5rem;
   display: flex;
   align-items: center;
