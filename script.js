@@ -99,7 +99,6 @@ function parse(html) {
 function displayTasks(tasklog) {
   elements.tasklog.innerHTML = "";
   tasklog.arr.forEach((task) => {
-    console.log(task);
     const element = elements.createTask(task);
     elements.tasklog.appendChild(element);
   });

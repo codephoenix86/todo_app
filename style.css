@@ -1,3 +1,13 @@
+* {
+  margin: 0;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 /* input field used to search task */
 
 /* <input type="text" class="task-input"> */
@@ -19,6 +29,10 @@
 /* buttons */
 
 .delete:hover {
+  cursor: pointer;
+}
+
+.add:hover {
   cursor: pointer;
 }
 
@@ -61,15 +75,19 @@
 .task .task-checkbox {
   margin: 0;
 }
+.task .task-checkbox:hover {
+  cursor: pointer;
+}
 
 /* task log */
 
 .tasklog {
   display: flex;
   position: relative;
+  flex-grow: 1;
   background-color: transparent;
   flex-direction: column;
-  height: 360px;
+  min-height: 360px;
   overflow-y: auto;
   scrollbar-width: none;
   gap: 8px;
@@ -94,13 +112,17 @@
 /* todo container */
 .todo_container {
   border: 1px solid black;
-  margin: auto;
+  margin: 0 12px;
   display: flex;
   flex-direction: column;
   gap: 8px;
   padding: 12px;
   border-radius: 1rem;
-  width: 480px;
+  max-width: 480px;
+  width: 100%;
+  min-width: 332px;
+  box-sizing: border-box;
+  height: 90%;
 }
 
 /* task entry section */
