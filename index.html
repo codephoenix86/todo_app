@@ -8,17 +8,21 @@
     <title>To Do</title>
   </head>
   <body>
-    <div class="todoContainer">
+    <div class="todo_container">
       <section class="task_entry">
-        <input type="text" class="task-input task_entry-input">
-        <input type="button" value="add" class="btn add">
+        <input
+          type="text"
+          placeholder="add a task"
+          class="task-input task_entry-input"
+        />
+        <input type="button" value="add" class="btn add" />
       </section>
-      <section class="tasklog">
-        <div class="task">
-          <input type="checkbox" class="task-checkbox"/>
-          <p class="task-name done">coding practice</p>
+      <section class="tasklog bg">
+        <!-- <div class="task">
+          <input type="checkbox" class="task-checkbox" />
+          <input type="text" value="${task.name}" class="task-name ${(task.active()?"":"done")}">
           <input type="button" class="btn delete" value="delete" />
-        </div>
+        </div> -->
       </section>
     </div>
   </body>

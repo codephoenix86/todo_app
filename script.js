@@ -61,19 +61,25 @@ const elements = {
   },
   createTask: function (task) {
     const html = `<div class="task">
-      <input type="checkbox" id=${task.id} class="task-checkbox"/>
-      <p class="task-name ${
-        task.active() ? "" : "done"
-      }" contenteditable="true">${task.name}</p>
-      <input type="button" id=${task.id} class="btn delete" value="delete" />
+      <input type="checkbox" id=${task.id} ${
+      task.active() ? "" : "checked"
+    } class="task-checkbox"/>
+      <input id=${task.id} type="text" value="${task.name}" class="task-name ${(task.active()?"":"done")}">
+      <input type="button" id=${task.id} class="btn delete" value="delete">
     </div>`;
     const element = parse(html);
     const del = element.querySelector(".delete");
     const checkbox = element.querySelector(".task-checkbox");
+    const input = element.querySelector('.task-name');
     del.addEventListener("click", function (event) {
       tasklog.delete(del.id);
       displayTasks(tasklog);
     });
+    input.addEventListener('blur', function (event) {
+      const name = input.value;
+      tasklog.edit(input.id, name);
+      displayTasks(tasklog);
+    })
     checkbox.addEventListener("change", function (event) {
       const task = tasklog.get(checkbox.id);
       if (task.active()) task.done();
@@ -109,8 +115,7 @@ function storeTasks(tasklog) {
 
 function restoreTasks() {
   let obj = JSON.parse(localStorage.getItem("tasklog")) || new TaskLog();
-  for (let i in obj.arr)
-    obj.arr[i] = Object.assign(new Task(), obj.arr[i]);
+  for (let i in obj.arr) obj.arr[i] = Object.assign(new Task(), obj.arr[i]);
   obj = Object.assign(new TaskLog(), obj);
   return obj;
 }

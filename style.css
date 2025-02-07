@@ -18,6 +18,10 @@
 
 /* buttons */
 
+.delete:hover {
+  cursor: pointer;
+}
+
 /* task strip */
 
 /* 
@@ -38,9 +42,11 @@
 
 .task .task-name {
   flex-grow: 1;
+  background-color: transparent;
   margin: 0;
   padding: 0;
   font-size: 1rem;
+  color: black;
   font-family: sans-serif;
   border: none;
 }
@@ -62,20 +68,41 @@
 
 .tasklog {
   display: flex;
+  position: relative;
+  background-color: transparent;
   flex-direction: column;
+  height: 360px;
+  overflow-y: auto;
+  scrollbar-width: none;
   gap: 8px;
 }
 
+.tasklog.bg::before {
+  content: "";
+  text-align: center;
+  z-index: -1;
+  font-size: 1.5rem;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: url(edit-3.png);
+  background-size: 20%;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.4;
+}
+
 /* todo container */
-.todoContainer {
+.todo_container {
   border: 1px solid black;
+  margin: auto;
   display: flex;
   flex-direction: column;
   gap: 8px;
   padding: 12px;
   border-radius: 1rem;
   width: 480px;
-  height:360px;
 }
 
 /* task entry section */
@@ -88,9 +115,8 @@
 */
 
 .task_entry {
-  border: 1px solid black;
+  /* border: 1px solid black; */
   border-radius: 0.5rem;
-  padding: 0 4px;
   display: flex;
   align-items: center;
   gap: 8px;
