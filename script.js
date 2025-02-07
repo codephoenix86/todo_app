@@ -48,7 +48,7 @@ const elements = {
     const html = 
     `<div class="task">
       <input type="checkbox" class="task-checkbox"/>
-      <p class="task-name">${task.name}</p>
+      <p class="task-name" contenteditable="true">${task.name}</p>
       <input type="button" id=${task.id} class="btn delete" value="delete" />
     </div>`
     const element = parse(html);
@@ -60,15 +60,6 @@ const elements = {
       tasklog.delete(del.id);
       displayTasks(tasklog);
     });
-    name.addEventListener('click', function (event) {
-      const input = elements.createInput(task.name);
-      input.addEventListener('blur', function () {
-        tasklog.edit(task.id, input.value);
-        displayTasks(tasklog);
-      });
-      name.replaceWith(input);
-      input.focus();
-    })
     return element;
   }
 };
