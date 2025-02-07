@@ -2,11 +2,22 @@ class Task {
   constructor(id, name) {
     this.id = id;
     this.name = name;
+    this.status = true;
   }
   editName(name) {
     this.name = name;
   }
+  active() {
+    return this.status;
+  }
+  done() {
+    this.status = false;
+  }
+  undone() {
+    this.status = true;
+  }
 }
+
 class TaskLog {
   constructor() {
     this.arr = [];
@@ -23,20 +34,19 @@ class TaskLog {
   delete(id) {
     const i = this.#getTask(id);
     this.arr.splice(i, 1);
-    if (this.isEmpty())
-      this.counter = 1;
+    if (this.isEmpty()) this.counter = 1;
   }
   #getTask(id) {
     for (let i in this.arr) {
       if (this.arr[i].id == id) return i;
     }
   }
+  get(id) {
+    for (let task of this.arr) if (task.id == id) return task;
+  }
   isEmpty() {
     if (this.arr.length == 0) return true;
     else return false;
-  }
-  tasks() {
-    return this.arr;
   }
 }
 
@@ -51,14 +61,23 @@ const elements = {
   },
   createTask: function (task) {
     const html = `<div class="task">
-      <input type="checkbox" class="task-checkbox"/>
-      <p class="task-name" contenteditable="true">${task.name}</p>
+      <input type="checkbox" id=${task.id} class="task-checkbox"/>
+      <p class="task-name ${
+        task.active() ? "" : "done"
+      }" contenteditable="true">${task.name}</p>
       <input type="button" id=${task.id} class="btn delete" value="delete" />
     </div>`;
     const element = parse(html);
     const del = element.querySelector(".delete");
+    const checkbox = element.querySelector(".task-checkbox");
     del.addEventListener("click", function (event) {
       tasklog.delete(del.id);
+      displayTasks(tasklog);
+    });
+    checkbox.addEventListener("change", function (event) {
+      const task = tasklog.get(checkbox.id);
+      if (task.active()) task.done();
+      else task.undone();
       displayTasks(tasklog);
     });
     return element;
@@ -74,24 +93,26 @@ function parse(html) {
 function displayTasks(tasklog) {
   elements.tasklog.innerHTML = "";
   tasklog.arr.forEach((task) => {
+    console.log(task);
     const element = elements.createTask(task);
     elements.tasklog.appendChild(element);
   });
   storeTasks(tasklog);
 }
 function storeTasks(tasklog) {
-  if (tasklog.isEmpty())
-    localStorage.removeItem('tasklog');
-  else
-  {
+  if (tasklog.isEmpty()) localStorage.removeItem("tasklog");
+  else {
     const jsonString = JSON.stringify(tasklog);
     localStorage.setItem("tasklog", jsonString);
   }
 }
 
 function restoreTasks() {
-  const obj = JSON.parse(localStorage.getItem("tasklog"));
-  return Object.assign(new TaskLog(), obj);
+  let obj = JSON.parse(localStorage.getItem("tasklog")) || new TaskLog();
+  for (let i in obj.arr)
+    obj.arr[i] = Object.assign(new Task(), obj.arr[i]);
+  obj = Object.assign(new TaskLog(), obj);
+  return obj;
 }
 
 function addTask(name) {

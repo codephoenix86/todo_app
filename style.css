@@ -49,6 +49,11 @@
   outline: none;
 }
 
+.task-name.done {
+  color: grey;
+  text-decoration: line-through;
+}
+
 .task .task-checkbox {
   margin: 0;
 }
@@ -70,6 +75,7 @@
   padding: 12px;
   border-radius: 1rem;
   width: 480px;
+  height:360px;
 }
 
 /* task entry section */
